@@ -1,0 +1,26 @@
+{
+  "name": "mail-send-api",
+  "version": "1.0.0",
+  "description": "free software to send mails with form using recaptcha using api request",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rdornelles/mail-send-api.git"
+  },
+  "author": "Rodrigo Dornelles",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/rdornelles/mail-send-api/issues"
+  },
+  "homepage": "https://github.com/rdornelles/mail-send-api#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "node-fetch": "^2.6.1",
+    "nodemailer": "^6.6.2"
+  }
+}
