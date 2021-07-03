@@ -65,7 +65,7 @@ api.post('/', async (request, response) => {
         await transporter.sendMail({
             from: process.env.MAIL_AUTH_USER,
             to: `${process.env.MAIL_AUTH_USER}, ${email}`,
-            subject: process.env.MAIL_MAIL_TILE.replace('{name}', name).replace('{email}', email).replace('{comment}', comment), 
+            subject: process.env.TEXT_MAIL_TITLE.replace('{name}', name).replace('{email}', email).replace('{comment}', comment), 
             text: process.env.TEXT_MAIL_BODY.replace('{name}', name).replace('{email}', email).replace('{comment}', comment),
             html: process.env.TEXT_MAIL_HTML.replace('{name}', name).replace('{email}', email).replace('{comment}', comment)
         });
