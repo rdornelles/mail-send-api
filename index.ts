@@ -16,17 +16,16 @@
  *   along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-const cors = require('cors');
 import { load } from 'ts-dotenv';
 import { config } from 'dotenv';
-import { json } from 'body-parser';
-import * as express from 'express';
+import fastify from 'fastify';
+import cors from 'fastify-cors';
 import { createTransport } from 'nodemailer';
 import fetch from 'node-fetch';
 
 config();
 
-const api = express();
+const api = fastify();
 const env = load({
     PORT: Number,
     ORIGIN: String,
@@ -44,12 +43,6 @@ const env = load({
     TEXT_RESPONSE_FAIL_CAPTCHA: String
 });
 
-const corsOptions = {
-    methods: "POST",
-    origin: env.ORIGIN,
-    optionsSuccessStatus: 200
-};
-
 const transporter = createTransport({
     host: env.MAIL_HOST ,
     port: env.MAIL_PORT,
@@ -60,10 +53,11 @@ const transporter = createTransport({
     },
 });
 
-api.listen(env.PORT);
-api.use(cors(corsOptions));
-api.use(json());
-api.use(express.urlencoded({ extended: false }));
+api.register(cors, { 
+    methods: "POST",
+    origin: env.ORIGIN,
+    optionsSuccessStatus: 200
+});
 
 api.post('/', async (request, response) => {
     const recaptcha : string = request.body["g-recaptcha-response"];
@@ -99,9 +93,11 @@ api.post('/', async (request, response) => {
         });
     })
     .then(async () => {
-        return response.json({ok: true, message: env.TEXT_RESPONSE_OK});
+        return response.send({ok: true, message: env.TEXT_RESPONSE_OK});
     })
     .catch(error => {
-        return response.json({ok: false, message: error.message ?? error});
+        return response.send({ok: false, message: error.message ?? error});
     });
 });
+
+api.listen(env.PORT);
