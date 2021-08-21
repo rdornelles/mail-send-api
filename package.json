@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "build": "tsc index.ts",
-    "postinstall": "npm run build"
+    "postinstall": "npm run build;npm start"
   },
   "repository": {
     "type": "git",
