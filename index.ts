@@ -60,7 +60,7 @@ api.register(cors, {
 });
 
 api.post('/', async (request, response) => {
-    const recaptcha : string = request.body["g-recaptcha-response"];
+    const recaptcha : string = request.body["g-recaptcha-response"] ?? request.body["h-captcha-response"];
     const comment : string = request.body["comment"];
     const email : string = request.body["email"];
     const name : string = request.body["name"];
