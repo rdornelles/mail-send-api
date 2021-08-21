@@ -47,7 +47,7 @@ api.use(express.urlencoded({ extended: false }));
 
 api.post('/', async (request, response) => {
     const remoteAddress = request.connection.remoteAddress;
-    const recaptcha = request.body["g-recaptcha-response"] ?? null;
+    const recaptcha = request.body["g-recaptcha-response"] ?? request.body["h-captcha-response"] ?? null;
     const comment = request.body["comment"] ?? null;
     const email = request.body["email"] ?? null;
     const name = request.body["name"] ?? null;
