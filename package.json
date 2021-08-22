@@ -1,12 +1,11 @@
 {
   "name": "mail-send-api",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "free software to send mails with form using recaptcha using api request",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "start": "node index.js",
-    "build": "tsc index.ts",
-    "postinstall": "npm run build;npm start"
+    "start": "node .",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
