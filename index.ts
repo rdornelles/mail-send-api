@@ -43,6 +43,14 @@ const env = load({
     TEXT_RESPONSE_FAIL_CAPTCHA: String
 });
 
+interface Body {
+    "g-recaptcha-response"?: string,
+    "h-captcha-response"?: string,
+    "comment": string,
+    "email": string,
+    "name": string
+}
+
 const transporter = createTransport({
     host: env.MAIL_HOST ,
     port: env.MAIL_PORT,
@@ -59,8 +67,8 @@ api.register(cors, {
     optionsSuccessStatus: 200
 });
 
-api.post('/', async (request, response) => {
-    const recaptcha : string = request.body["g-recaptcha-response"] ?? request.body["h-captcha-response"];
+api.post<{Body: Body}>('/', async (request, response) => {
+    const recaptcha : string = request.body["g-recaptcha-response"] ?? request.body["h-captcha-response"] ?? '';
     const comment : string = request.body["comment"];
     const email : string = request.body["email"];
     const name : string = request.body["name"];
