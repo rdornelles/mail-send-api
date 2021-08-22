@@ -108,4 +108,4 @@ api.post<{Body: Body}>('/', async (request, response) => {
     });
 });
 
-api.listen(env.PORT);
+api.listen(env.PORT, '0.0.0.0');
